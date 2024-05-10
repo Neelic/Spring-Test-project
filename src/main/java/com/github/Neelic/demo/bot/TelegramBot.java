@@ -1,4 +1,4 @@
-package com.github.Neelic.demo;
+package com.github.Neelic.demo.bot;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -10,18 +10,18 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
     @Value("${bot.token}")
-    private String BOT_TOKEN;
+    private String token;
     @Value("${bot.username}")
-    private String BOT_USERNAME;
+    private String botUsername;
 
     @Override
     public String getBotUsername() {
-        return BOT_USERNAME;
+        return botUsername;
     }
 
     @Override
     public String getBotToken() {
-        return BOT_TOKEN;
+        return token;
     }
 
     @Override
