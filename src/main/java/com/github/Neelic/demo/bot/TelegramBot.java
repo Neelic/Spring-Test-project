@@ -33,9 +33,9 @@ public class TelegramBot extends TelegramLongPollingBot {
 
             if (message.startsWith(COMMAND_PREFIX)) {
                 String commandIdentifier = message.split(" ")[0].substring(1).toLowerCase();
-                commandContainer.retriveCommand(commandIdentifier).execute(update);
+                commandContainer.retrieveCommand(commandIdentifier).execute(update);
             } else {
-                commandContainer.retriveCommand(NO.getCommandName()).execute(update);
+                commandContainer.retrieveCommand(NO.getCommandName()).execute(update);
             }
         }
     }
