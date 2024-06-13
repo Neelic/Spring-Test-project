@@ -1,0 +1,10 @@
+version: '4.2'
+
+services:
+  jrtb:
+    image: neelic/telegram-bot:0.0.1
+    build:
+      context: .
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+    restart: always
