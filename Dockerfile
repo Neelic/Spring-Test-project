@@ -11,6 +11,7 @@ RUN --mount=type=cache,target=/root/.m2 ./mvnw -f $HOME/pom.xml clean package
 #
 # Package stage
 #
+#! Write your token here
 ENV TELEGRAM_TOKEN=1375780501:AAE4A6Rz0BSnIGzeu896OjQnjzsMEG6_uso
 FROM eclipse-temurin:21-jre-jammy
 ARG JAR_FILE=/usr/app/target/*.jar

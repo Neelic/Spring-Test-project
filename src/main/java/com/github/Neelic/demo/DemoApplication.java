@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {
-		"package com.github.Neelic.demo.bot",
+		"com.github.Neelic.demo.bot",
 		"org.telegram.telegrambots"
 })
 public class DemoApplication {
