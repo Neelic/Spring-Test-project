@@ -1,12 +1,14 @@
 version: '4.2'
 
 services:
-#  spring-boot-tb:
-#    build:
-#      context: .
-#    environment:
-#      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
-#    restart: always
+  #  spring-boot-tb:
+  #    depends_on:
+  #      - spring-boot-tb-db
+  #    build:
+  #      context: .
+  #    environment:
+  #      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+  #    restart: always
 
   spring-boot-tb-db:
     image: mysql:8.0.37-debian
@@ -16,9 +18,9 @@ services:
     environment:
       MYSQL_DATABASE: "dev_spring_boot_tb_db"
       # Password for root access
-      MYSQL_ROOT_PASSWORD: 12345
-      MYSQL_USER: user
-      MYSQL_PASSWORD: 12345
+      MYSQL_ROOT_PASSWORD: 12345 #or use ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: user           #or use ${MYSQL_USER}
+      MYSQL_PASSWORD: 12345      #or use ${MYSQL_PASSWORD}
     volumes:
       - mysql-data:/var/lib/mysql
     expose:
