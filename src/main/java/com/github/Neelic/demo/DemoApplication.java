@@ -6,13 +6,15 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {
-		"package com.github.Neelic.demo.bot",
-		"org.telegram.telegrambots"
+        "com.github.Neelic.demo.bot",
+        "com.github.Neelic.demo.service",
+        "com.github.Neelic.demo.repository",
+        "org.telegram.telegrambots"
 })
 public class DemoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 
 }

@@ -2,6 +2,8 @@ package com.github.Neelic.demo.bot;
 
 import com.github.Neelic.demo.command.CommandContainer;
 import com.github.Neelic.demo.service.SendBotMessageServiceImpl;
+import com.github.Neelic.demo.service.TelegramUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -12,18 +14,16 @@ import static com.github.Neelic.demo.command.CommandName.NO;
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
 
+    public static String COMMAND_PREFIX = "/";
+    private final CommandContainer commandContainer;
     @Value("${bot.token}")
     private String token;
-
     @Value("${bot.username}")
     private String botUsername;
 
-    public static String COMMAND_PREFIX = "/";
-
-    private final CommandContainer commandContainer;
-
-    public TelegramBot() {
-        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this));
+    @Autowired
+    public TelegramBot(TelegramUserService telegramUserService) {
+        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService);
     }
 
     @Override

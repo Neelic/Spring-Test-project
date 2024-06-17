@@ -17,10 +17,10 @@ public class HelpCommand implements Command {
                     <b>Начать\\закончить работу с ботом</b>
                     %s - начать работу со мной
                     %s - приостановить работу со мной
-
+                    %s - получить статистику пользователей
                     %s - получить помощь в работе со мной
                     """,
-            START.getCommandName(), STOP.getCommandName(), HELP.getCommandName());
+            START.getCommandName(), STOP.getCommandName(), STAT.getCommandName(), HELP.getCommandName());
 
     public HelpCommand(SendBotMessageService sendBotMessageService) {
         this.sendBotMessageService = sendBotMessageService;

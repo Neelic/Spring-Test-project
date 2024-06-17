@@ -1,6 +1,7 @@
 package com.github.Neelic.demo.command;
 
 import com.github.Neelic.demo.service.SendBotMessageService;
+import com.github.Neelic.demo.service.TelegramUserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +17,9 @@ class CommandContainerTest {
 
     @BeforeEach
     void setUp() {
-        commandContainer = new CommandContainer(Mockito.mock(SendBotMessageService.class));
+        SendBotMessageService sendBotMessageService = Mockito.mock(SendBotMessageService.class);
+        TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
+        commandContainer = new CommandContainer(sendBotMessageService, telegramUserService);
     }
 
     @Test

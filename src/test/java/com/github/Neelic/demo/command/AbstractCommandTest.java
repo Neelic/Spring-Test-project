@@ -3,17 +3,19 @@ package com.github.Neelic.demo.command;
 import com.github.Neelic.demo.bot.TelegramBot;
 import com.github.Neelic.demo.service.SendBotMessageService;
 import com.github.Neelic.demo.service.SendBotMessageServiceImpl;
+import com.github.Neelic.demo.service.TelegramUserService;
 import org.mockito.Mockito;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.testng.annotations.Test;
 
 public abstract class AbstractCommandTest {
 
     protected TelegramBot bot = Mockito.mock(TelegramBot.class);
     protected SendBotMessageService sendBotMessageService = new SendBotMessageServiceImpl(bot);
+    protected TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
 
     abstract String getCommandName();
 
