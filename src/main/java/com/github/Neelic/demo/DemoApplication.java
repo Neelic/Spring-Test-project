@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
         "com.github.Neelic.demo.bot",
         "com.github.Neelic.demo.service",
         "com.github.Neelic.demo.repository",
+        "com.github.Neelic.demo.javarushclient",
         "org.telegram.telegrambots"
 })
 public class DemoApplication {
