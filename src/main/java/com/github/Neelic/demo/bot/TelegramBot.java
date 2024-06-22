@@ -1,6 +1,8 @@
 package com.github.Neelic.demo.bot;
 
 import com.github.Neelic.demo.command.CommandContainer;
+import com.github.Neelic.demo.javarushclient.JavaRushGroupClient;
+import com.github.Neelic.demo.service.GroupSubService;
 import com.github.Neelic.demo.service.SendBotMessageServiceImpl;
 import com.github.Neelic.demo.service.TelegramUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,9 @@ public class TelegramBot extends TelegramLongPollingBot {
     private String botUsername;
 
     @Autowired
-    public TelegramBot(TelegramUserService telegramUserService) {
-        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService);
+    public TelegramBot(TelegramUserService telegramUserService, JavaRushGroupClient groupClient, GroupSubService groupSubService) {
+        this.commandContainer =
+                new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService, groupClient, groupSubService);
     }
 
     @Override

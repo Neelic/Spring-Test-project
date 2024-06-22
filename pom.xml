@@ -20,6 +20,7 @@
         <mysql.version>8.0.33</mysql.version>
         <jaxb-api.version>2.3.0</jaxb-api.version>
         <unirest.version>3.11.01</unirest.version>
+        <apache.commons.version>3.11</apache.commons.version>
     </properties>
     <dependencies>
         <dependency>
@@ -80,6 +81,11 @@
             <groupId>com.konghq</groupId>
             <artifactId>unirest-java</artifactId>
             <version>${unirest.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache.commons.version}</version>
         </dependency>
     </dependencies>
 

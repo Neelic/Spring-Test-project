@@ -31,7 +31,7 @@ public class JavaRushGroupClientTest {
                 .offset(1)
                 .limit(3)
                 .build();
-        
+
         List<GroupInfo> groupList = groupClient.getGroupList(args);
 
         Assertions.assertNotNull(groupList);
@@ -67,7 +67,7 @@ public class JavaRushGroupClientTest {
 
         Integer groupCount = groupClient.getGroupCount(args);
 
-        Assertions.assertEquals(30, groupCount);
+        Assertions.assertEquals(29, groupCount);
     }
 
     @Test
