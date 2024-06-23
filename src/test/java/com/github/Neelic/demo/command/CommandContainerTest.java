@@ -1,5 +1,9 @@
 package com.github.Neelic.demo.command;
 
+import com.github.Neelic.demo.javarushclient.JavaRushGroupClient;
+import com.github.Neelic.demo.javarushclient.JavaRushGroupClientImpl;
+import com.github.Neelic.demo.service.GroupSubService;
+import com.github.Neelic.demo.service.GroupSubServiceImpl;
 import com.github.Neelic.demo.service.SendBotMessageService;
 import com.github.Neelic.demo.service.TelegramUserService;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +23,10 @@ class CommandContainerTest {
     void setUp() {
         SendBotMessageService sendBotMessageService = Mockito.mock(SendBotMessageService.class);
         TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
-        commandContainer = new CommandContainer(sendBotMessageService, telegramUserService);
+        JavaRushGroupClient javaRushGroupClient = Mockito.mock(JavaRushGroupClientImpl.class);
+        GroupSubService groupSubService = Mockito.mock(GroupSubServiceImpl.class);
+        commandContainer = new CommandContainer(sendBotMessageService, telegramUserService, javaRushGroupClient,
+                groupSubService);
     }
 
     @Test

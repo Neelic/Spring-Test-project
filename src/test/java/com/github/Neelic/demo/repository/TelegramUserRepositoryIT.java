@@ -1,5 +1,6 @@
 package com.github.Neelic.demo.repository;
 
+import com.github.Neelic.demo.repository.entity.GroupSub;
 import com.github.Neelic.demo.repository.entity.TelegramUser;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +22,7 @@ import java.util.Optional;
 @ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class TelegramUserRepositoryTest {
+public class TelegramUserRepositoryIT {
 
     @Autowired
     private TelegramUserRepository telegramUserRepository;
@@ -37,18 +38,29 @@ public class TelegramUserRepositoryTest {
     @Test
     @Sql(scripts = {"/sql/clear_db.sql"})
     public void shouldProperlySaveTelegramUser() {
-        //given
         TelegramUser telegramUser = new TelegramUser();
         telegramUser.setChatId("1234567890");
         telegramUser.setActive(false);
         telegramUserRepository.save(telegramUser);
 
-        //when
         Optional<TelegramUser> saved = telegramUserRepository.findById(telegramUser.getChatId());
 
-        //then
         Assertions.assertTrue(saved.isPresent());
         Assertions.assertEquals(telegramUser, saved.get());
+    }
+
+    @Sql(scripts = {"/sql/clear_db.sql", "/sql/five_group_subs_for_user.sql"})
+    @Test
+    public void shouldProperlyGetAllGroupSubsForUser() {
+        Optional<TelegramUser> userFromDB = telegramUserRepository.findById("1");
+
+        Assertions.assertTrue(userFromDB.isPresent());
+        List<GroupSub> groupSubs = userFromDB.get().getGroupSubs();
+        for (int i = 0; i < groupSubs.size(); i++) {
+            Assertions.assertEquals(String.format("g%s", (i + 1)), groupSubs.get(i).getTitle());
+            Assertions.assertEquals(i + 1, groupSubs.get(i).getId());
+            Assertions.assertEquals(i + 1, groupSubs.get(i).getLastArticleId());
+        }
     }
 }
 
