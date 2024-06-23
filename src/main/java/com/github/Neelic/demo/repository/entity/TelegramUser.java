@@ -2,6 +2,7 @@ package com.github.Neelic.demo.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "tg_user")
+@EqualsAndHashCode(exclude = "groupSubs")
 public class TelegramUser {
 
     @Id

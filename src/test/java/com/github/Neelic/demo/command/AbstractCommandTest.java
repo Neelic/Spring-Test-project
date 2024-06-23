@@ -27,11 +27,7 @@ public abstract class AbstractCommandTest {
     public void shouldProperlyExecuteCommand() {
         Long chatId = 1234567824356L;
 
-        Update update = new Update();
-        Message message = Mockito.mock(Message.class);
-        Mockito.when(message.getChatId()).thenReturn(chatId);
-        Mockito.when(message.getText()).thenReturn(getCommandName());
-        update.setMessage(message);
+        Update update = prepareUpdate(chatId, getCommandName());
 
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId.toString());
@@ -39,11 +35,19 @@ public abstract class AbstractCommandTest {
         sendMessage.enableHtml(true);
 
         getCommand().execute(update);
-
         try {
             Mockito.verify(bot).execute(sendMessage);
         } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
+    }
+
+    public static Update prepareUpdate(Long chatId, String commandName) {
+        Update update = new Update();
+        Message message = Mockito.mock(Message.class);
+        Mockito.when(message.getChatId()).thenReturn(chatId);
+        Mockito.when(message.getText()).thenReturn(commandName);
+        update.setMessage(message);
+        return update;
     }
 }
