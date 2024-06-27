@@ -13,7 +13,8 @@ import static com.github.Neelic.demo.javarushclient.dto.GroupInfoType.TECH;
 
 public class JavaRushGroupClientTest {
 
-    private final JavaRushGroupClient groupClient = new JavaRushGroupClientImpl("https://javarush.com/api/1.0/rest");
+    public final static String JAVARUSH_API_PATH = "https://javarush.com/api/1.0/rest";
+    private final JavaRushGroupClient groupClient = new JavaRushGroupClientImpl(JAVARUSH_API_PATH);
 
     @Test
     public void shouldProperlyGetGroupsWithEmptyArgs() {
