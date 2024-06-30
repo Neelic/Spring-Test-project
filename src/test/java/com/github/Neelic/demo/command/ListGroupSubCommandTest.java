@@ -47,7 +47,7 @@ public class ListGroupSubCommandTest {
 
         String collectedGroups = "Я нашел все подписки на группы: \n\n" +
                 telegramUser.getGroupSubs().stream()
-                        .map(it -> "Группа: " + it.getTitle() + " ID - " + it.getId() + " \n")
+                        .map(it -> "Группа: " + it.getTitle() + " ID - " + it.getId() + "\n")
                         .collect(Collectors.joining());
 
         command.execute(update);
