@@ -2,8 +2,7 @@ package com.github.Neelic.demo.service;
 
 import com.github.Neelic.demo.repository.TelegramUserRepository;
 import com.github.Neelic.demo.repository.entity.TelegramUser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,12 +10,11 @@ import java.util.Optional;
 /**
  * Implementation of {@link TelegramUserService}.
  */
-@Component
+@Service
 public class TelegramUserServiceImpl implements TelegramUserService {
 
     private final TelegramUserRepository telegramUserRepository;
 
-    @Autowired
     public TelegramUserServiceImpl(TelegramUserRepository telegramUserRepository) {
         this.telegramUserRepository = telegramUserRepository;
     }
