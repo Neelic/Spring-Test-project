@@ -4,7 +4,6 @@ import com.github.Neelic.demo.javarushclient.JavaRushPostClient;
 import com.github.Neelic.demo.javarushclient.dto.PostInfo;
 import com.github.Neelic.demo.repository.entity.GroupSub;
 import com.github.Neelic.demo.repository.entity.TelegramUser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -19,7 +18,6 @@ public class FindNewArticleServiceImpl implements FindNewArticleService {
     private final JavaRushPostClient javaRushPostClient;
     private final SendBotMessageService sendMessageService;
 
-    @Autowired
     public FindNewArticleServiceImpl(GroupSubService groupSubService, JavaRushPostClient javaRushPostClient,
                                      SendBotMessageService sendMessageService) {
         this.groupSubService = groupSubService;
