@@ -22,7 +22,7 @@ class SendBotMessageServiceTest {
 
     @Test
     void sendMessage() {
-        String chatId = "test_chat_id";
+        String chatId = "1L";
         String message = "test_message";
 
         SendMessage sendMessage = new SendMessage();
@@ -30,7 +30,7 @@ class SendBotMessageServiceTest {
         sendMessage.setChatId(chatId);
         sendMessage.enableHtml(true);
 
-        sendBotMessageService.sendMessage(chatId, message);
+        sendBotMessageService.sendMessage(Long.valueOf(chatId), message);
 
         try {
             Mockito.verify(bot).execute(sendMessage);

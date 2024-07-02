@@ -24,7 +24,7 @@ public class ListGroupSubCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        TelegramUser telegramUser = telegramUserService.findByChatId(String.valueOf(CommandUtils.getChatId(update)))
+        TelegramUser telegramUser = telegramUserService.findByChatId(CommandUtils.getChatId(update))
                 .orElseThrow(NotFoundException::new);
 
         String message = "Я нашел все подписки на группы: \n\n";

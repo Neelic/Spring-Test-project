@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @ComponentScan(basePackages = {
         "com.github.Neelic.demo.bot",
+        "com.github.Neelic.demo.job",
         "com.github.Neelic.demo.service",
         "com.github.Neelic.demo.repository",
         "com.github.Neelic.demo.javarushclient",

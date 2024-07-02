@@ -18,10 +18,10 @@ import static java.util.Collections.singletonList;
 
 public class DeleteGroupSubCommandTest {
 
-    private Command command;
-    private SendBotMessageService sendBotMessageService;
     GroupSubService groupSubService;
     TelegramUserService telegramUserService;
+    private Command command;
+    private SendBotMessageService sendBotMessageService;
 
     @Before
     public void setUp() {
@@ -37,14 +37,14 @@ public class DeleteGroupSubCommandTest {
         Long chatId = 23456L;
         Update update = AbstractCommandTest.prepareUpdate(chatId, DELETE_GROUP_SUB.getCommandName());
 
-        Mockito.when(telegramUserService.findByChatId(String.valueOf(chatId)))
+        Mockito.when(telegramUserService.findByChatId(chatId))
                 .thenReturn(Optional.of(new TelegramUser()));
 
         String expectedMessage = "Пока нет подписок на группы. Чтобы добавить подписку напиши /addGroupSub";
 
         command.execute(update);
 
-        Mockito.verify(sendBotMessageService).sendMessage(chatId.toString(), expectedMessage);
+        Mockito.verify(sendBotMessageService).sendMessage(chatId, expectedMessage);
     }
 
     @Test
@@ -56,18 +56,23 @@ public class DeleteGroupSubCommandTest {
         gs1.setId(123);
         gs1.setTitle("GS1 Title");
         telegramUser.setGroupSubs(singletonList(gs1));
-        Mockito.when(telegramUserService.findByChatId(String.valueOf(chatId)))
+        Mockito.when(telegramUserService.findByChatId(chatId))
                 .thenReturn(Optional.of(telegramUser));
 
-        String expectedMessage = "Чтобы удалить подписку на группу - передай комадну вместе с ID группы. \n" +
-                "Например: /deleteGroupSub 16 \n\n" +
-                "я подготовил список всех групп, на которые ты подписан) \n\n" +
-                "имя группы - ID группы \n\n" +
-                "GS1 Title - 123 \n";
+        String expectedMessage = """
+                Чтобы удалить подписку на группу - передай комадну вместе с ID группы.\s
+                Например: /deleteGroupSub 16\s
+
+                я подготовил список всех групп, на которые ты подписан)\s
+
+                имя группы - ID группы\s
+
+                GS1 Title - 123\s
+                """;
 
         command.execute(update);
 
-        Mockito.verify(sendBotMessageService).sendMessage(chatId.toString(), expectedMessage);
+        Mockito.verify(sendBotMessageService).sendMessage(chatId, expectedMessage);
     }
 
     @Test
@@ -80,7 +85,7 @@ public class DeleteGroupSubCommandTest {
         gs1.setId(123);
         gs1.setTitle("GS1 Title");
         telegramUser.setGroupSubs(singletonList(gs1));
-        Mockito.when(telegramUserService.findByChatId(String.valueOf(chatId)))
+        Mockito.when(telegramUserService.findByChatId(chatId))
                 .thenReturn(Optional.of(telegramUser));
 
         String expectedMessage = "неправильный формат ID группы.\n " +
@@ -88,7 +93,7 @@ public class DeleteGroupSubCommandTest {
 
         command.execute(update);
 
-        Mockito.verify(sendBotMessageService).sendMessage(chatId.toString(), expectedMessage);
+        Mockito.verify(sendBotMessageService).sendMessage(chatId, expectedMessage);
     }
 
     @Test
@@ -103,13 +108,13 @@ public class DeleteGroupSubCommandTest {
         gs1.setId(123);
         gs1.setTitle("GS1 Title");
         TelegramUser telegramUser = new TelegramUser();
-        telegramUser.setChatId(chatId.toString());
+        telegramUser.setChatId(chatId);
         telegramUser.setGroupSubs(singletonList(gs1));
         ArrayList<TelegramUser> users = new ArrayList<>();
         users.add(telegramUser);
         gs1.setUsers(users);
         Mockito.when(groupSubService.findById(groupId)).thenReturn(Optional.of(gs1));
-        Mockito.when(telegramUserService.findByChatId(String.valueOf(chatId)))
+        Mockito.when(telegramUserService.findByChatId(chatId))
                 .thenReturn(Optional.of(telegramUser));
 
         String expectedMessage = "Удалил подписку на группу: GS1 Title";
@@ -118,7 +123,7 @@ public class DeleteGroupSubCommandTest {
 
         users.remove(telegramUser);
         Mockito.verify(groupSubService).save(gs1);
-        Mockito.verify(sendBotMessageService).sendMessage(chatId.toString(), expectedMessage);
+        Mockito.verify(sendBotMessageService).sendMessage(chatId, expectedMessage);
     }
 
     @Test
@@ -136,6 +141,6 @@ public class DeleteGroupSubCommandTest {
         command.execute(update);
 
         Mockito.verify(groupSubService).findById(groupId);
-        Mockito.verify(sendBotMessageService).sendMessage(chatId.toString(), expectedMessage);
+        Mockito.verify(sendBotMessageService).sendMessage(chatId, expectedMessage);
     }
 }
