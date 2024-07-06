@@ -16,7 +16,7 @@ public class GroupSubServiceTest {
     private GroupSubRepository groupSubRepository;
     private TelegramUser newUser;
 
-    private final static String CHAT_ID = "1";
+    private final static Long CHAT_ID = 1L;
 
     @Before
     public void setUp() {
@@ -51,7 +51,7 @@ public class GroupSubServiceTest {
     @Test
     public void shouldProperlyAddUserToExistingGroup() {
         TelegramUser oldTelegramUser = new TelegramUser();
-        oldTelegramUser.setChatId("2");
+        oldTelegramUser.setChatId(2L);
         oldTelegramUser.setActive(true);
 
         GroupDiscussionInfo groupDiscussionInfo = new GroupDiscussionInfo();

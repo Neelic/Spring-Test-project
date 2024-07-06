@@ -15,16 +15,16 @@ public class JavaRushPostClientImpl implements JavaRushPostClient {
     private final String javaRushApiPostPath;
 
     public JavaRushPostClientImpl(@Value("${javarush.api.path}") String javaRushApiPostPath) {
-        this.javaRushApiPostPath = javaRushApiPostPath + "/post";
+        this.javaRushApiPostPath = javaRushApiPostPath + "/posts";
     }
 
     @Override
     public List<PostInfo> findNewPosts(Integer groupId, Integer lastPostId) {
         List<PostInfo> lastPostsByGroup = Unirest.get(javaRushApiPostPath)
-                .queryString("order", "new")
+                .queryString("order", "NEW")
                 .queryString("groupKid", groupId)
                 .queryString("limit", 15)
-                .asObject(new GenericType<List<PostInfo>>() {
+                .asObject(new GenericType<ArrayList<PostInfo>>() {
                 }).getBody();
         List<PostInfo> newPosts = new ArrayList<>();
 

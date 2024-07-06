@@ -39,7 +39,7 @@ public class TelegramUserRepositoryIT {
     @Sql(scripts = {"/sql/clear_db.sql"})
     public void shouldProperlySaveTelegramUser() {
         TelegramUser telegramUser = new TelegramUser();
-        telegramUser.setChatId("1234567890");
+        telegramUser.setChatId(1234567890L);
         telegramUser.setActive(false);
         telegramUserRepository.save(telegramUser);
 
@@ -52,14 +52,14 @@ public class TelegramUserRepositoryIT {
     @Sql(scripts = {"/sql/clear_db.sql", "/sql/five_group_subs_for_user.sql"})
     @Test
     public void shouldProperlyGetAllGroupSubsForUser() {
-        Optional<TelegramUser> userFromDB = telegramUserRepository.findById("1");
+        Optional<TelegramUser> userFromDB = telegramUserRepository.findById(1L);
 
         Assertions.assertTrue(userFromDB.isPresent());
         List<GroupSub> groupSubs = userFromDB.get().getGroupSubs();
         for (int i = 0; i < groupSubs.size(); i++) {
             Assertions.assertEquals(String.format("g%s", (i + 1)), groupSubs.get(i).getTitle());
             Assertions.assertEquals(i + 1, groupSubs.get(i).getId());
-            Assertions.assertEquals(i + 1, groupSubs.get(i).getLastArticleId());
+            Assertions.assertEquals(i + 1, groupSubs.get(i).getLastPostId());
         }
     }
 }
